@@ -60,12 +60,4 @@ internal class UsersRepository : IUsersRepository
             .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
     }
 
-    //public async Task<ApplicationUser?> GetUserByEmailAndPassword(string? email, string? password)
-    //{
-    //    // Query user by Email and Password using LINQ
-    //    ApplicationUser? user = await _dbContext.Users
-    //        .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-
-    //    return user;
-    //}
 }

@@ -17,10 +17,10 @@ public static class DependencyInjection
     /// <returns></returns>
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // Add DbContext with SQL Server
+        // Add DbContext with PostgreSQL
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("SqlServerConnection"));
+            options.UseNpgsql(configuration.GetConnectionString("PostgreSqlConnection"));
         });
 
         // Add repository

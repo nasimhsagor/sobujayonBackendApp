@@ -20,21 +20,21 @@ public class ApplicationDbContext : Microsoft.EntityFrameworkCore.DbContext
 
         modelBuilder.Entity<ApplicationUser>(entity =>
         {
-            entity.ToTable("Users", "dbo");
+            entity.ToTable("users");
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.Id).HasColumnName("Id");
-            entity.Property(e => e.Email).HasColumnName("Email");
-            entity.Property(e => e.Phone).HasColumnName("Phone");
-            entity.Property(e => e.Name).HasColumnName("Name");
-            entity.Property(e => e.Address).HasColumnName("Address");
-            entity.Property(e => e.Dob).HasColumnName("Dob");
-            entity.Property(e => e.Gender).HasColumnName("Gender");
-            entity.Property(e => e.Password).HasColumnName("Password");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.Phone).HasColumnName("phone");
+            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.Address).HasColumnName("address");
+            entity.Property(e => e.Dob).HasColumnName("dob");
+            entity.Property(e => e.Gender).HasColumnName("gender");
+            entity.Property(e => e.Password).HasColumnName("password");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.ToTable("Products");
+            entity.ToTable("products");
             entity.HasKey(e => e.Id);
             entity.HasOne(p => p.Category)           // Product has one Category
                   .WithMany(c => c.Products)         // Category has many Products
@@ -47,7 +47,7 @@ public class ApplicationDbContext : Microsoft.EntityFrameworkCore.DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.ToTable("Categories");
+            entity.ToTable("categories");
             entity.HasKey(e => e.Id);
             entity.HasIndex(e => e.Slug).IsUnique();
             entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
