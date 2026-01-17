@@ -1,30 +1,31 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using sobujayonApp.Core.Entities;
-using sobujayonApp.Core.RepositoryContracts;
+﻿using Microsoft.AspNetCore.Mvc;
+using sobujayonApp.Core.DTO;
+using sobujayonApp.Core.ServiceContracts;
+using System.Threading.Tasks;
 
 namespace sobujayonApp.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoriesRepository _repo;
-        public CategoriesController(ICategoriesRepository repo) => _repo = repo;
+        private readonly ICategoriesService _categoriesService;
+
+        public CategoriesController(ICategoriesService categoriesService)
+        {
+            _categoriesService = categoriesService;
+        }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() => Ok(await _repo.GetAllCategories());
-
-        [HttpPost]
-        [Authorize] // Only admins should create categories
-        public async Task<IActionResult> Create([FromBody] Category category)
+        public async Task<IActionResult> Get()
         {
-            if (string.IsNullOrEmpty(category.Slug))
-                category.Slug = category.Name.ToLower().Replace(" ", "-");
+            return Ok(await _categoriesService.GetAllCategories());
+        }
 
-            var result = await _repo.AddCategory(category);
-            return CreatedAtAction(nameof(GetAll), new { id = result.Id }, result);
+        [HttpGet("{slug}/products")]
+        public async Task<IActionResult> GetProducts(string slug)
+        {
+            return Ok(await _categoriesService.GetCategoryProducts(slug));
         }
     }
 }

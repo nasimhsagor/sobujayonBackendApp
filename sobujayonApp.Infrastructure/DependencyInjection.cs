@@ -26,6 +26,8 @@ public static class DependencyInjection
         // Add repository
         services.AddScoped<IUsersRepository, UsersRepository>();
         services.AddScoped<IProductsRepository, ProductsRepository>();
+        services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         return services;
     }

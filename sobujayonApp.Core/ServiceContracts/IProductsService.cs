@@ -1,4 +1,5 @@
 ﻿using sobujayonApp.Core.Entities;
+using sobujayonApp.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace sobujayonApp.Core.ServiceContracts
 {
     public interface IProductsService
     {
-        Task<IEnumerable<Product>> GetAllProducts();
-        Task<Product?> GetProductBySlug(string slug);
-        Task<Product> CreateProduct(Product product);
-        Task<bool> DeleteProduct(int id);
+        Task<IEnumerable<ProductResponse>> GetProducts(string? search, string? category, decimal? minPrice, decimal? maxPrice, int page, int limit, string? sort);
+        Task<ProductDetailsResponse?> GetProductBySlug(string slug);
+        Task<ProductResponse> CreateProduct(CreateProductRequest request);
+        Task<IEnumerable<ReviewResponse>> GetReviews(int productId); // productId as int internal
     }
 }

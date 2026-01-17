@@ -13,6 +13,13 @@ namespace sobujayonApp.Core.Entities
         public string Slug { get; set; } = null!; // Error 3 was here
         public string? Description { get; set; }
         public decimal Price { get; set; }
+        public decimal? OriginalPrice { get; set; }
+        public string? Image { get; set; }
+        public double Rating { get; set; }
+        public int ReviewsCount { get; set; }
+        public string? Badge { get; set; }
+        public string? BadgeColor { get; set; }
+        public int Stock { get; set; }
         public int CategoryId { get; set; }
 
         // Navigation property
